@@ -24,17 +24,27 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a class="nav-link" href="/">Home</a>
-				</li>
 				
-				<li class="nav-item">
-					<a class="nav-link" href="/authors">Authors</a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" href="/manhwas">Manhwas</a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+				@if(Auth::check())
+					<li class="nav-item">
+						<a class="nav-link" href="/authors">Authors</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/manhwas">Manhwas</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/logout">Logout</a>
+					</li>
+				@else
+					<li class="nav-item">
+						<a class="nav-link" href="/login">Log in</a>
+					</li>
+				@endif
 
 			</ul>
 		</div>

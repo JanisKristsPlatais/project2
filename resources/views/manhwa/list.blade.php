@@ -37,6 +37,10 @@
 			</tbody>
 		</table>
 		
-		<a href="/manhwas/create" class="btn btn-primary">Add new manhwa</a>
+@else
+	<p>No entries found in database </p>
+@endif
+		
+<a href="/manhwas/create" class="btn btn-primary">Add new manhwa</a>
 
 @endsection
