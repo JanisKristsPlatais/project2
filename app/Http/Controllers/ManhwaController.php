@@ -66,6 +66,12 @@ class ManhwaController extends Controller
 		$manhwa->price = $validatedData['price'];
 		$manhwa->year = $validatedData['year'];
 		$manhwa->display = (bool) ($validatedData['display'] ?? false);
+		if ($request->hasFile('image')) {
+			$uploadedFile = $request->file('image');
+			$extension = $uploadedFile->clientExtension();
+			$name = uniqid();
+			$manhwa->image = $uploadedFile->storePubliclyAs('/', $name . '.' . $extension, 'uploads' );
+		}
 		$manhwa->save();
 		
 		return redirect('/manhwa');
@@ -101,6 +107,12 @@ class ManhwaController extends Controller
 		$manhwa->price = $validatedData['price'];
 		$manhwa->year = $validatedData['year'];
 		$manhwa->display = (bool) ($validatedData['display'] ?? false);
+		if ($request->hasFile('image')) {
+			$uploadedFile = $request->file('image');
+			$extension = $uploadedFile->clientExtension();
+			$name = uniqid();
+			$manhwa->image = $uploadedFile->storePubliclyAs('/', $name . '.' . $extension, 'uploads' );
+		}
 		$manhwa->save();
 		
 		return redirect('/manhwa/update/' . $manhwa->id);
