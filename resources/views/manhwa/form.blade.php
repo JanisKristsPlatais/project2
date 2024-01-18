@@ -5,7 +5,7 @@
 		 <div class="alert alert-danger">Please fix the validation errors! </div>
 	 @endif
 	 
-	<form method="post" action="{{ $manhwa->exists ? '/manhwa/patch/' . $manhwa->id : '/manhwa/put' }}" enctype="multipart/form-data">
+	<form method="post" action="{{ $manhwa->exists ? '/manhwas/patch/' . $manhwa->id : '/manhwas/put' }}" enctype="multipart/form-data">
 		@csrf
 		
 		<div class="mb-3">

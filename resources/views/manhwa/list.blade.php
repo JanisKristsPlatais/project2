@@ -26,8 +26,8 @@
 				<td>&euro; {{ number_format($manhwa->price, 2, '.') }}</td>
 				<td>{!! $manhwa->display ? '&#x2714;' : '&#x274C;' !!}</td>
 				<td> 
-					<a href="/manhwa/update/{{ $manhwa->id }}" class="btn btn-outline-primary btn-sm">Edit</a> / 
-					<form action="/manhwa/delete/{{ $manhwa->id }}" method="post" class="deletion-form d-inline">
+					<a href="/manhwas/update/{{ $manhwa->id }}" class="btn btn-outline-primary btn-sm">Edit</a> / 
+					<form action="/manhwas/delete/{{ $manhwa->id }}" method="post" class="deletion-form d-inline">
 						@csrf
 							<button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
 					</form>
@@ -37,6 +37,6 @@
 			</tbody>
 		</table>
 		
-		<a href="/manhwa/create" class="btn btn-primary">Add new manhwa</a>
+		<a href="/manhwas/create" class="btn btn-primary">Add new manhwa</a>
 
 @endsection

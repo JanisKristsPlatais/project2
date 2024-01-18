@@ -3,33 +3,35 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ManhwaRequest;
 use App\Models\Manhwa;
+
 use Illuminate\Http\Request;
 
 class ManhwaController extends Controller
 {
-    public function up(){
-		Schema::create('manhwa', function (Blueprint $table) {
-			$table->id();
-			
-			$table->foreignId('author_id');
-			$table->string('name', 256);
-			$table->text('description')->nullable();
-			$table->decimal('price', 8, 2)->nullable();
-			$table->integer('year');
-			$table->string('image', 256)->nullable();
-			$table->boolean('display');
-			
-			$table->timestamps();
-		});
+	private function saveManhwaData(Manhwa $manhwa, ManhwaRequest $request){
+		$validatedData = $request->validated();
+		
+		$manhwa->fill($validatedData);
+		$manhwa->display = (bool) ($validatedData['display'] ?? false);
+		
+		if ($request->hasFile('image')) {
+			$uploadedFile = $request->file('image');
+			$extension = $uploadedFile->clientExtension();
+			$name = uniqid();
+			$manhwa->image = $uploadedFile->storePubliclyAs('/', $name . '.' . $extension, 'uploads' );
+		}
+		$manhwa->save();
 	}
-	
 
-	public function list(){
-		$items = Manhwa:orderBy('name', 'asc')->get();
+
+	public function list()
+	{
+		$items = Manhwa::orderBy('name', 'asc')->get();
 		return view(
 			'manhwa.list',[
-				'title' => 'Manhwa',
+				'title' => 'Manhwas',
 				'items' => $items
 			]
 		);
@@ -48,33 +50,10 @@ class ManhwaController extends Controller
 	}
 	
 	
-	public function put(Request $request){
-		$validatedData = $request->validate([
-			'name' => 'required|min:3|max:256',
-			'author_id' => 'required',
-			'description' => 'nullable',
-			'price' => 'nullable|numeric',
-			'year' => 'numeric',
-			'image' => 'nullable|image',
-			'display' => 'nullable'
-		]);
- 
+	public function put(ManhwaRequest $request){
 		$manhwa = new Manhwa();
-		$manhwa->name = $validatedData['name'];
-		$manhwa->author_id = $validatedData['author_id'];
-		$manhwa->description = $validatedData['description'];
-		$manhwa->price = $validatedData['price'];
-		$manhwa->year = $validatedData['year'];
-		$manhwa->display = (bool) ($validatedData['display'] ?? false);
-		if ($request->hasFile('image')) {
-			$uploadedFile = $request->file('image');
-			$extension = $uploadedFile->clientExtension();
-			$name = uniqid();
-			$manhwa->image = $uploadedFile->storePubliclyAs('/', $name . '.' . $extension, 'uploads' );
-		}
-		$manhwa->save();
-		
-		return redirect('/manhwa');
+		$this->saveBookData($manhwa, $request);		
+		return redirect('/manhwas');
 	}
 	
 	
@@ -90,37 +69,14 @@ class ManhwaController extends Controller
 	}
 	
 	
-	public function put(Manhwa $manhwa, Request $request){
-		$validatedData = $request->validate([
-			'name' => 'required|min:3|max:256',
-			'author_id' => 'required',
-			'description' => 'nullable',
-			'price' => 'nullable|numeric',
-			'year' => 'numeric',
-			'image' => 'nullable|image',
-			'display' => 'nullable'
-		]);
- 
-		$manhwa->name = $validatedData['name'];
-		$manhwa->author_id = $validatedData['author_id'];
-		$manhwa->description = $validatedData['description'];
-		$manhwa->price = $validatedData['price'];
-		$manhwa->year = $validatedData['year'];
-		$manhwa->display = (bool) ($validatedData['display'] ?? false);
-		if ($request->hasFile('image')) {
-			$uploadedFile = $request->file('image');
-			$extension = $uploadedFile->clientExtension();
-			$name = uniqid();
-			$manhwa->image = $uploadedFile->storePubliclyAs('/', $name . '.' . $extension, 'uploads' );
-		}
-		$manhwa->save();
-		
-		return redirect('/manhwa/update/' . $manhwa->id);
+	public function patch(Manhwa $manhwa, ManhwaRequest $request){
+		$this->saveBookData($manhwa, $request);	
+		return redirect('/manhwas/update/' . $manhwa->id);
 	}
 	
 	
 	public function delete(Manhwa $manhwa){
 		$manhwa->delete();
-		return redirect('/manhwa');
+		return redirect('/manhwas');
 	}
 }

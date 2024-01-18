@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+	public function manhwas(){
+		return $this->hasMany(Manhwa::class);
+	}
+	
     use HasFactory;
+	
 }
 
-public function manhwa(){
-	return $this->hasMany(Manhwa::class);
-}
+

@@ -7,6 +7,7 @@ use App\Http\Controllers\ManhwaController;
 ##use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/authors', [AuthorController::class, 'list']);
 Route::get('/authors/create', [AuthorController::class, 'create']);
 Route::post('/authors/put', [AuthorController::class, 'put']);
@@ -15,9 +16,9 @@ Route::post('/authors/patch/{author}', [AuthorController::class, 'patch']);
 Route::post('/authors/delete/{author}', [AuthorController::class, 'delete']);
 
 // Manhwa routes
-Route::get('/manhwa', [ManhwaController::class, 'list']);
-Route::get('/manhwa/create', [ManhwaController::class, 'create']);
-Route::post('/manhwa/put', [ManhwaController::class, 'put']);
-Route::get('/manhwa/update/{manhwa}', [ManhwaController::class, 'update']);
-Route::post('/manhwa/patch/{manhwa}', [ManhwaController::class, 'patch']);
-Route::post('/manhwa/delete/{manhwa}', [ManhwaController::class, 'delete']);
+Route::get('/manhwas', [ManhwaController::class, 'list']);
+Route::get('/manhwas/create', [ManhwaController::class, 'create']);
+Route::post('/manhwas/put', [ManhwaController::class, 'put']);
+Route::get('/manhwas/update/{manhwa}', [ManhwaController::class, 'update']);
+Route::post('/manhwas/patch/{manhwa}', [ManhwaController::class, 'patch']);
+Route::post('/manhwas/delete/{manhwa}', [ManhwaController::class, 'delete']);

@@ -33,7 +33,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" href="/manhwa">Manhwa</a>
+					<a class="nav-link" href="/manhwas">Manhwas</a>
 				</li>
 
 			</ul>
