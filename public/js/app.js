@@ -154,6 +154,17 @@ function renderSingle(manhwa) {
         let dl = document.createElement('dl');
         dl.classList = 'row';
 		
+		// author
+			let authorLabel = document.createElement('dt');
+			authorLabel.classList = 'col-sm-3';
+			authorLabel.textContent = 'Author';
+			dl.appendChild(authorLabel);
+
+			let authorValue = document.createElement('dd');
+			authorValue.classList = 'col-sm-9';
+			authorValue.textContent = manhwa.author;
+			dl.appendChild(authorValue);
+		
 		// tags
 			let tagLabel = document.createElement('dt');
 			tagLabel.classList = 'col-sm-3';
