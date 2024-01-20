@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 	public function login(){
-
+		// echo 'user : <input value="'
+		// . \Illuminate\Support\Facades\Hash::make('password')
+		// . '">';
+		// exit();
 		return view(
 			'auth.login',[
 			'title' => 'Login'

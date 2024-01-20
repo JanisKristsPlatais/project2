@@ -21,7 +21,8 @@ class ManhwaRequest extends FormRequest
 			'price' => 'nullable|numeric',
 			'year' => 'numeric',
 			'image' => 'nullable|image',
-			'display' => 'nullable'
+			'display' => 'nullable',
+			'tags' => 'array',
         ];
     }
 	

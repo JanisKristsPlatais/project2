@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('manhwas', function (Blueprint $table) {
             $table->id();
-			
 			$table->foreignId('author_id');
 			$table->string('name', 256);
 			$table->text('description')->nullable();
@@ -21,7 +20,6 @@ return new class extends Migration
 			$table->integer('year');
 			$table->string('image', 256)->nullable();
 			$table->boolean('display');
-			
 			$table->timestamps();
         });
     }

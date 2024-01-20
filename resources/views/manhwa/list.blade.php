@@ -27,7 +27,7 @@
 				<td>{!! $manhwa->display ? '&#x2714;' : '&#x274C;' !!}</td>
 				<td> 
 					<a href="/manhwas/update/{{ $manhwa->id }}" class="btn btn-outline-primary btn-sm">Edit</a> / 
-					<form action="/manhwas/delete/{{ $manhwa->id }}" method="post" class="deletion-form d-inline">
+					<form action="/manhwas/delete/{{ $manhwa->id }}" method="post" class="d-inline deletion-form ">
 						@csrf
 							<button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
 					</form>

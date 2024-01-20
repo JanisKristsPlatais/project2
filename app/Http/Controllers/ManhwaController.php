@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ManhwaRequest;
 use App\Models\Manhwa;
 use App\Models\Author;
+use App\Models\Tag;
 
 use Illuminate\Http\Request;
 
@@ -39,12 +40,14 @@ class ManhwaController extends Controller
 	
 	
 	public function create(){
-		$authors = Author::orderBy('id', 'asc')->get();
+		$authors = Author::orderBy('name', 'asc')->get();
+		$tags = Tag::orderBy('name', 'asc')->get();
 		return view(
 			'manhwa.form',[
 				'title' => 'Add manhwa',
 				'manhwa' => new Manhwa(),
 				'authors' => $authors,
+				'tags' => $tags,
 			]
 		);
 	}
@@ -52,25 +55,30 @@ class ManhwaController extends Controller
 	
 	public function put(ManhwaRequest $request){
 		$manhwa = new Manhwa();
-		$this->saveManhwaData($manhwa, $request);		
+		$this->saveManhwaData($manhwa, $request);
+
+		$manhwa->tags()->sync($request->input('tags',[]));
 		return redirect('/manhwas');
 	}
 	
 	
 	public function update(Manhwa $manhwa){
-		$authors = Author::orderBy('id', 'asc')->get();
+		$authors = Author::orderBy('name', 'asc')->get();
+		$tags = Tag::orderBy('name', 'asc')->get();
 		return view(
 			'manhwa.form',[
 				'title' => 'Edit manhwa',
 				'manhwa' => $manhwa,
 				'authors' => $authors,
+				'tags' => $tags,
 			]
 		);
 	}
 	
 	
 	public function patch(Manhwa $manhwa, ManhwaRequest $request){
-		$this->saveManhwaData($manhwa, $request);	
+		$this->saveManhwaData($manhwa, $request);
+		$manhwa->tags()->sync($request->input('tags',[]));		
 		return redirect('/manhwas/update/' . $manhwa->id);
 	}
 	
@@ -82,7 +90,8 @@ class ManhwaController extends Controller
 	
 	public function list()
 	{
-		$items = Manhwa::orderBy('id' , 'asc')->get();
+		$items = Manhwa::orderBy('name', 'asc')->get();
+		
 		return view(
 			'manhwa.list',[
 				'title' => 'Manhwas',

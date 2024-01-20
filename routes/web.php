@@ -4,6 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\ManhwaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\DataController;
+
+
 
 
 ##use Illuminate\Support\Facades\Route;
@@ -29,3 +33,18 @@ Route::post('/manhwas/delete/{manhwa}', [ManhwaController::class, 'delete']);
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout']);
+
+//Tag routes
+Route::get('/tags', [TagController::class, 'list']);
+Route::get('/tags/create', [TagController::class, 'create']);
+Route::post('/tags/put', [TagController::class, 'put']);
+Route::get('/tags/update/{tag}', [TagController::class, 'update']);
+Route::post('/tags/patch/{tag}', [TagController::class, 'patch']);
+Route::post('/tags/delete/{tag}', [TagController::class, 'delete']);
+
+// Data routes
+Route::prefix('data')->group(function () {
+	Route::get('/get-top-manhwas', [DataController::class, 'getTopManhwas']);
+	Route::get('/get-manhwa/{manhwa}', [DataController::class, 'getManhwa']);
+	Route::get('/get-related-manhwas/{manhwa}', [DataController::class, 'getRelatedManhwas']);
+});

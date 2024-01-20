@@ -19,7 +19,7 @@
 	<div class="container">
 		<span class="navbar-brand mb-0 h1">Project 2</span>
 		
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
@@ -35,6 +35,10 @@
 					
 					<li class="nav-item">
 						<a class="nav-link" href="/manhwas">Manhwas</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" href="/tags">Tags</a>
 					</li>
 					
 					<li class="nav-item">

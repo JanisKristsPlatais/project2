@@ -28,7 +28,8 @@
 		<select id="manhwa-author" name="author_id" class="form-select @error('author_id') is-invalid @enderror">
 			<option value="">Choose the author!</option>
 				@foreach($authors as $author)
-					<option value="{{ $author->id }}"
+					<option 
+						value="{{ $author->id }}"
 						@if ($author->id == old('author_id', $manhwa->author->id ?? false)) selected @endif
 					>{{ $author->name }}</option>
 				@endforeach
@@ -47,6 +48,25 @@
 			<p class="invalid-feedback">{{ $errors->first('description') }}</p>
 		@enderror
 	</div>
+	
+	<div class="mb-3">
+		<label class="form-label">Tags</label>
+		@foreach($tags as $tag)
+			<div class="form-check">
+				<input type="checkbox" id="tag-{{ $tag->id }}" name="tags[]" value="{{ $tag->id }}" class="form-check-input @error('tags') is-invalid @enderror"
+                   @if (in_array($tag->id, old('tags', $manhwa->tags->pluck('id')->toArray())))
+                        checked
+                   @endif
+				>
+				<label class="form-check-label" for="tag-{{ $tag->id }}">{{ $tag->name }}</label>
+			</div>
+		@endforeach
+
+		@error('tags')
+			<p class="invalid-feedback">{{ $errors->first('tags') }}</p>
+		@enderror
+	</div>
+	
 			
 	<div class="mb-3">
 		<label for="manhwa-year" class="form-label">Release year</label>

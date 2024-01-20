@@ -31,7 +31,7 @@ class AuthorController extends Controller
 	public function create(){
 		return view(
 			'author.form',[
-				'title' => 'Add new author',
+				'title' => 'Add Author',
 				'author' => new Author()
 
 			]
