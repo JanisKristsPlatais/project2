@@ -84,6 +84,7 @@ class ManhwaController extends Controller
 	
 	
 	public function delete(Manhwa $manhwa){
+        $manhwa->tags()->detach();
 		$manhwa->delete();
 		return redirect('/manhwas');
 	}
